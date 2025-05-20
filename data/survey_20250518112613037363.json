@@ -1,0 +1,12 @@
+{
+    "age": 38,
+    "gender": "male",
+    "total_income": 12345.0,
+    "utilities": 1111.0,
+    "entertainment": 123.0,
+    "healthcare": 0.0,
+    "education": 0.0,
+    "school_fees": 456.0,
+    "shopping": 987.0,
+    "timestamp": "2025-05-18T11:26:13.037351+00:00"
+}

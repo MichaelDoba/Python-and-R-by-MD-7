@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>📊 Survey Analysis | Healthcare Insights</title>
+  <style>
+    :root {
+      --primary-color: #4a6fa5;
+      --secondary-color: #166088;
+      --accent-color: #4fc3f7;
+      --text-color: #2d3436;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      --border-radius: 12px;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --transition-speed: 0.25s;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 2px solid #dde3e8;
+    }
+
+    h1 {
+      color: var(--secondary-color);
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.03em;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: #545f66;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 2.8rem;
+    }
+
+    .chart-container {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 2.2rem 2.5rem;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+      cursor: default;
+    }
+
+    .chart-container:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    h2 {
+      color: var(--primary-color);
+      font-size: 1.9rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    .chart-img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+      margin-bottom: 1rem;
+      object-fit: contain;
+    }
+
+    .chart-container p {
+      font-size: 1rem;
+      color: #545f66;
+      line-height: 1.45;
+      margin-top: 0;
+      user-select: text;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.9rem 1.7rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+      transition: all var(--transition-speed) ease;
+      user-select: none;
+      cursor: pointer;
+      border: none;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      box-shadow: 0 5px 15px rgba(74, 111, 165, 0.4);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: var(--secondary-color);
+      box-shadow: 0 8px 25px rgba(22, 96, 136, 0.6);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-secondary {
+      background-color: var(--accent-color);
+      color: var(--text-color);
+      box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus {
+      background-color: #81d4fa;
+      box-shadow: 0 8px 25px rgba(129, 212, 250, 0.6);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #dde3e8;
+      color: #6c7a89;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      user-select: none;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 2rem 1rem 3rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.3rem;
+      }
+
+      main {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📈 Survey Results Analysis</h1>
+    <p class="subtitle">Visual insights from participant spending patterns 💰</p>
+  </header>
+
+  <main>
+    {% if income_chart %}
+    <div class="chart-container">
+      <h2>📊 Income Distribution by Age</h2>
+      <img src="{{ income_chart }}" alt="Income by Age" class="chart-img" />
+      <p>Analyzing how income levels vary across different age groups in our survey population.</p>
+    </div>
+    {% endif %}
+
+    {% if spending_chart %}
+    <div class="chart-container">
+      <h2>👫 Spending Distribution by Gender and Category</h2>
+      <img src="{{ spending_chart }}" alt="Spending by Gender" class="chart-img" />
+      <p>Comparing spending habits between genders across various expense categories.</p>
+    </div>
+    {% endif %}
+
+    {% if healthcare_chart %}
+    <div class="chart-container">
+      <h2>🏥 Healthcare Spending vs Income</h2>
+      <img src="{{ healthcare_chart }}" alt="Healthcare vs Income" class="chart-img" />
+      <p>Investigating if income levels influence healthcare-related expenses.</p>
+    </div>
+    {% endif %}
+
+    {% if pie_chart %}
+    <div class="chart-container">
+      <h2>📈 Overall Spending Breakdown</h2>
+      <img src="{{ pie_chart }}" alt="Spending Pie Chart" class="chart-img" />
+      <p>A holistic view of how total spending is distributed across different categories.</p>
+    </div>
+    {% endif %}
+
+    <div class="action-buttons">
+      <a href="/" class="btn btn-primary">🏠 Back to Survey</a>
+      <a href="/export-csv" class="btn btn-secondary">💾 Export Data to CSV</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Thank you for contributing to our healthcare research! 🙌</p>
+    <p>Your insights help shape better healthcare solutions for everyone. ❤️</p>
+  </footer>
+</body>
+</html>

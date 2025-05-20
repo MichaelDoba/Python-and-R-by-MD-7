@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You! 🙌</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      line-height: 1.6;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .thank-you-container {
+      background: white;
+      border-radius: 10px;
+      padding: 3rem 4rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    h1 {
+      color: #2c3e50;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .emoji {
+      font-size: 3.5rem;
+      margin: 1rem 0;
+      display: block;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .countdown {
+      font-size: 1.1rem;
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .action-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .action-links a {
+      text-decoration: none;
+      color: white;
+      background-color: #3498db;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .action-links a:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+    .action-links a:last-child {
+      background-color: #2ecc71;
+    }
+    .action-links a:last-child:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-container">
+    <span class="emoji">🙏✨</span>
+    <h1>Thank You for Participating!</h1>
+    <p>Your responses have been successfully recorded and will help us improve healthcare services. We truly appreciate your time! 💙</p>
+    
+    <div class="action-links">
+      <a href="/analyze">📊 View Analysis</a>
+      <a href="/">✏️ Submit Another Response</a>
+    </div>
+
+    <p style="margin-top: 2rem;">Your contribution makes a difference! 🤗</p>
+
+    <p class="countdown">You will automatically be redirected to the survey in <span id="countdown">20</span> seconds...</p>
+  </div>
+
+  <script>
+
+    const duration = 4 * 1000;
+    const animationEnd = Date.now() + duration;
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const confettiInterval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) {
+        clearInterval(confettiInterval);
+        return;
+      }
+
+      confetti({
+        particleCount: 40,        
+        startVelocity: 60,        
+        spread: 120,             
+        ticks: 100,
+        origin: {
+          x: randomInRange(0.1, 0.9),
+          y: Math.random() - 0.2
+        },
+        shapes: ['circle', 'square', 'ribbon'], 
+        scalar: 1.5,           
+        gravity: 0.5
+      });
+    }, 100);
+
+    let seconds = 20;
+    const countdownEl = document.getElementById("countdown");
+    const countdownTimer = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(countdownTimer);
+        window.location.href = "/";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
